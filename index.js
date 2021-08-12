@@ -4,9 +4,11 @@ const commandLineArgs = require('command-line-args');
 
 require('dotenv').config('.env');
 
-const { loopExample } = require('./utils/loop');
-const { dataExample } = require('./utils/data');
-const { writeExample } = require('./utils/write');
+const { loop } = require('./utils/loop');
+// const { dataExample } = require('./utils/data');
+// const { writeExample } = require('./utils/write');
+
+const ogItems = require('./source');
 
 const auth = async (key, secret) => {
     return axios.post('https://v2.api.uberflip.com/authorize', {
@@ -29,9 +31,6 @@ const auth = async (key, secret) => {
 const run = async(argv) => {
     const optionDefinitions = [
       { name: 'nocommit', type: Boolean },
-      {name: 'spec',
-        type: String,
-      },
       {
         name: 'key',
         type: String,
@@ -73,9 +72,9 @@ const run = async(argv) => {
   
     // get all tags
     const token = await auth(apiKey, apiSecret);
-    const loopResult = await loopExample(token);
-    const dataResult = await dataExample(loopResult);
-    await writeExample(dataResult, hub_id);
+    const loopResult = await loop(token, ogItems, hub_id);
+    console.log(loopResult);
+    console.log('YOU DID IT');
 
   };
 

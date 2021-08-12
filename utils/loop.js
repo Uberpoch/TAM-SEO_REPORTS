@@ -1,20 +1,13 @@
-import { callExample } from './call';
+const { call } = require('./call');
 
-exports.loopExample = async(token) => {
-  let url = 'https://v2.api.uberflip.com/items?limit=100&page=1';
-  let page = 0;
-  let totalPages = 0;
+exports.loop = async(token, ogItems, hub_id) => {
+  let url = `https://v2.api.uberflip.com/streams`;
   let array = [];
-
-  do{
-    let res = await callExample(token, url);
-    totalPages = res.meta.total_pages;
-    page++;
-    url = url + `?page=${page}`;
-    console.log(`called: page ${page} of ${totalPages}`);
+  
+  for(let i = 0; i < ogItems.length; i++) {
+    let res = await call(token, url, ogItems[i], hub_id);
     array = array.concat(res.data);
-    console.log(`array length: ${array.length}`);
-
-  } while (page < totalPages)
+  }
+  
   return array;
 }

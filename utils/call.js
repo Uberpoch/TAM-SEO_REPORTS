@@ -1,6 +1,10 @@
 const axios = require('axios');
-exports.callExample = async(token, url) => {
-  return await axios.get(url, {
+
+exports.call = async(token, url, obj, hub) => {
+  let body = obj;
+  body.hub_id = hub;
+
+  return await axios.post(url, body, {
     headers: { 
         'Authorization': `Bearer ${token}`,
         'User_Agent': `Nathan UF`
