@@ -2,31 +2,15 @@ const axios = require('axios');
 const fs = require('fs');
 const commandLineArgs = require('command-line-args');
 
-require('dotenv').config('.env');
+// require('dotenv').config('.env');
 
-const { loop } = require('./utils/loop');
-// const { dataExample } = require('./utils/data');
-// const { writeExample } = require('./utils/write');
+const { auth } = require('./utils/auth');
+const { getItemsLoop, getStreamsLoop } = require('./utils/loop');
+const { writeStreams, writeItems } = require('./utils/write');
 
-const ogItems = require('./source');
+// const ogItems = require('./source');
 
-const auth = async (key, secret) => {
-    return axios.post('https://v2.api.uberflip.com/authorize', {
-        grant_type:	'client_credentials',
-        client_id: key,
-        client_secret: secret
-    })
-    .catch(function (error) {
-        console.log(error);
-        })
-    .then(function (response) {
-        // tokenType = response.data.token_type;
-         const token = response.data.access_token;
-        // console.log(token);
-        return token;
-    });
 
-}
 
 const run = async(argv) => {
     const optionDefinitions = [
@@ -41,7 +25,11 @@ const run = async(argv) => {
       },
       {
         name: 'hub',
-        type: Number,
+        type: String,
+      },
+      {
+        name: 'file',
+        type: String,
       },
     ];
   
@@ -49,7 +37,8 @@ const run = async(argv) => {
     const options = commandLineArgs(optionDefinitions, { argv });
     let apiKey = options.key; //--key
     let apiSecret = options.sec; //--sec
-    const hub_id = options.hub; //--hub
+    const hub = options.hub; //--hub
+    const file = options.file; //--hub
 
     console.log(options);
     // warning for missing commandline arguments
@@ -58,22 +47,29 @@ const run = async(argv) => {
     }
   
     if (apiKey === undefined ) {
-      console.error('no apikey was supplied please follow this format $node index.js run --key ENTERAPIKEY --sec ENTERFEEDURL. --hub ENTERHUBID');
+      console.error('no apikey was supplied please follow this format $node index.js run --key ENTERAPIKEY --sec ENTERAPISEC --hub ENTERHUBID --file ENTERFILENAME');
       return;
     }
     if (apiSecret === undefined ) {
-        console.error('no apikey was supplied please follow this format $node index.js run --key ENTERAPIKEY --sec ENTERFEEDURL. --hub ENTERHUBID');
+        console.error('no api secret was supplied please follow this format $node index.js run --key ENTERAPIKEY --sec ENTERAPISEC --hub ENTERHUBID --file ENTERFILENAME');
         return;
     }
-    if (hub_id === undefined ) {
-        console.error('no apikey was supplied please follow this format $node index.js run --key ENTERAPIKEY --sec ENTERFEEDURL. --hub ENTERHUBID');
+    if (hub === undefined ) {
+        console.error('no hub was supplied please follow this format $node index.js run --key ENTERAPIKEY --sec ENTERAPISEC --hub ENTERHUBID --file ENTERFILENAME');
+    return;
+    }
+    if (file === undefined ) {
+        console.error('no file name was supplied please follow this format $node index.js run --key ENTERAPIKEY --sec ENTERAPISEC --hub ENTERHUBID --file ENTERFILENAME');
     return;
     }
   
     // get all tags
     const token = await auth(apiKey, apiSecret);
-    const loopResult = await loop(token, ogItems, hub_id);
-    console.log(loopResult);
+    const streams = await getStreamsLoop(token, hub);
+    const items = await getItemsLoop(token, hub);
+    await writeStreams(streams, file);
+    await writeItems(items, file);
+    
     console.log('YOU DID IT');
 
   };

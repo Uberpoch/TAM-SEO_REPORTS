@@ -1,0 +1,112 @@
+[
+  {
+    "id": 7595104,
+    "name": "Blog",
+    "type": "blogs",
+    "seo_title": null,
+    "seo_description": null,
+    "seo_status": "crawlable (canonical)",
+    "no_robots": false,
+    "hidden": false,
+    "force_self_canonical": 0
+  },
+  {
+    "id": 7595113,
+    "name": "Documentation",
+    "type": "blogs",
+    "seo_title": null,
+    "seo_description": null,
+    "seo_status": "crawlable",
+    "no_robots": false,
+    "hidden": false,
+    "force_self_canonical": 0
+  },
+  {
+    "id": 7595119,
+    "name": "Marketing Stream w banner",
+    "type": "custom",
+    "seo_title": null,
+    "seo_description": null,
+    "seo_status": "crawlable (canonical)",
+    "no_robots": false,
+    "hidden": false,
+    "force_self_canonical": 1
+  },
+  {
+    "id": 7595116,
+    "name": "Marketing Stream wo banner",
+    "type": "custom",
+    "seo_title": null,
+    "seo_description": null,
+    "seo_status": "crawlable",
+    "no_robots": false,
+    "hidden": false,
+    "force_self_canonical": 0
+  },
+  {
+    "id": 7554734,
+    "name": "Sales Assist [DO NOT SHARE or ARCHIVE]",
+    "type": "blogs",
+    "seo_title": null,
+    "seo_description": null,
+    "seo_status": "no-index/follow",
+    "no_robots": false,
+    "hidden": true,
+    "force_self_canonical": 0
+  },
+  {
+    "id": 7595110,
+    "name": "Sales Stream w banner",
+    "type": "targeted",
+    "seo_title": null,
+    "seo_description": null,
+    "seo_status": "no-index/follow",
+    "no_robots": true,
+    "hidden": true,
+    "force_self_canonical": 0
+  },
+  {
+    "id": 7595107,
+    "name": "Sales Stream wo banner",
+    "type": "targeted",
+    "seo_title": null,
+    "seo_description": null,
+    "seo_status": "no-index/follow",
+    "no_robots": true,
+    "hidden": true,
+    "force_self_canonical": 0
+  },
+  {
+    "id": 8538487,
+    "name": "scranline marketing",
+    "type": "custom",
+    "seo_title": null,
+    "seo_description": null,
+    "seo_status": "no-index/follow",
+    "no_robots": true,
+    "hidden": true,
+    "force_self_canonical": 0
+  },
+  {
+    "id": 8496506,
+    "name": "Youtube - Scran Line",
+    "type": "videos",
+    "seo_title": null,
+    "seo_description": null,
+    "seo_status": "crawlable",
+    "no_robots": false,
+    "hidden": false,
+    "force_self_canonical": 0
+  },
+  {
+    "id": 8496509,
+    "name": "Youtube - test videos",
+    "type": "videos",
+    "seo_title": null,
+    "seo_description": "01234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789",
+    "seo_status": "crawlable",
+    "no_robots": false,
+    "hidden": false,
+    "force_self_canonical": 0
+  }
+]
